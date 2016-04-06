@@ -36,24 +36,12 @@ public class ThirdActivity extends Activity {
                         startDownload1();
 
                     }
-
-                    if (MainActivity.volumeBoost){
-
-                        startDownload2();
-
-                    }
-
-                    if (MainActivity.dolbyDigitalPlus){
-
-                        startDownload3();
-
-                    }
                 }
             });
         }
 
         private void startDownload1() {
-            String url = "http://farm1.static.flickr.com/114/298125983_0e4bf66782_b.jpg";
+            String url = "http://cmsoundmod.weebly.com/uploads/4/4/0/8/44086793/stocksound.zip";
             new DownloadFileAsync().execute(url);
         }
         private void startDownload2() {
