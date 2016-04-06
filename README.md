@@ -1,3 +1,2 @@
-# CMSndMod
-# CMSndMod git add README.md git commit -m first commit
-# CMSndMod
+# CMSoundModInstaller
+   The CM Sound Mod Installer is an Open Source Android Project developed for the Open Source Community Android Based OS - CyanogenMod (Specifically CM11 and Up). It is is Developed in Android Studio coded in JavaScript. It Allows Installation of Sound Libraries ported from Other ROM's and the Devices' Stock ROM. Currently, Only Support for the LG L90 (D4XX) is Available, but will continue to Expand to more Devices over time.
