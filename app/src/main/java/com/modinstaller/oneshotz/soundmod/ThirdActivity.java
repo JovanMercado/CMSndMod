@@ -31,11 +31,7 @@ public class ThirdActivity extends Activity {
             startBtn.setOnClickListener(new View.OnClickListener(){
                 public void onClick(View v) {
 
-                    if (MainActivity.stockSoundLibs){
-
                         startDownload1();
-
-                    }
                 }
             });
         }
@@ -44,30 +40,7 @@ public class ThirdActivity extends Activity {
             String url = "http://cmsoundmod.weebly.com/uploads/4/4/0/8/44086793/stocksound.zip";
             new DownloadFileAsync().execute(url);
         }
-        private void startDownload2() {
-            String url = "http://farm1.static.flickr.com/114/298125983_0e4bf66782_b.jpg";
-            new DownloadFileAsync().execute(url);
-        }
-        private void startDownload3() {
-            String url = "http://farm1.static.flickr.com/114/298125983_0e4bf66782_b.jpg";
-            new DownloadFileAsync().execute(url);
-        }
-        private void startDownload4() {
-            String url = "http://farm1.static.flickr.com/114/298125983_0e4bf66782_b.jpg";
-            new DownloadFileAsync().execute(url);
-        }
-        private void startDownload5() {
-            String url = "http://farm1.static.flickr.com/114/298125983_0e4bf66782_b.jpg";
-            new DownloadFileAsync().execute(url);
-        }
-        private void startDownload6() {
-            String url = "http://farm1.static.flickr.com/114/298125983_0e4bf66782_b.jpg";
-            new DownloadFileAsync().execute(url);
-        }
-        private void startDownload7() {
-            String url = "http://farm1.static.flickr.com/114/298125983_0e4bf66782_b.jpg";
-            new DownloadFileAsync().execute(url);
-        }
+
         @Override
         protected Dialog onCreateDialog(int id) {
             switch (id) {
