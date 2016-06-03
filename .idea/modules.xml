@@ -3,8 +3,6 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/CMSndMod.iml" filepath="$PROJECT_DIR$/CMSndMod.iml" />
-      <module fileurl="file://$PROJECT_DIR$/SoundMod.iml" filepath="$PROJECT_DIR$/SoundMod.iml" />
-      <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
     </modules>
   </component>
