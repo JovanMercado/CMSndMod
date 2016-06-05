@@ -27,6 +27,8 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLConnection;
 
+import eu.chainfire.libsuperuser.Shell;
+
 public class ThirdActivity extends Activity {
 
     //Declare Variables

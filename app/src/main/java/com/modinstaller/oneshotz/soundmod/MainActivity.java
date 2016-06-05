@@ -1,7 +1,14 @@
 package com.modinstaller.oneshotz.soundmod;
 
+import android.Manifest;
+import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
+import android.support.design.widget.Snackbar;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
@@ -14,7 +21,6 @@ import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
 
-    public static int fileToDownload;
     public static Boolean stockSoundLibs;
     public static Boolean volumeBoost;
     public static Boolean dolbyDigitalPlus;
@@ -22,6 +28,10 @@ public class MainActivity extends AppCompatActivity {
     public static Boolean v4a;
     public static Boolean sony;
     public static Boolean srs;
+    private static final int PERMISSION_REQUEST_CODE = 1;
+    private Context context;
+    private Activity activity;
+    private View view;
 
     ArrayList<String> selection = new ArrayList<String>();
 
@@ -33,11 +43,12 @@ public class MainActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle("L90 SoundMod Installer");
 
+
         Button next = (Button) findViewById(com.modinstaller.oneshotz.cm13soundmodinstaller.R.id.button);
         next.setOnClickListener(new Button.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(MainActivity.this, SecondActivity.class));
+                startActivity(new Intent(MainActivity.this, PermissionsActivity.class));
             }
         });
 
@@ -45,6 +56,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
  public void selectItem(View view){
+
 
 boolean checked = ((CheckBox) view).isChecked();
      switch (view.getId())
@@ -214,9 +226,9 @@ boolean checked = ((CheckBox) view).isChecked();
             return true;
         }
 
+
+
         return super.onOptionsItemSelected(item);
     }
-
-
-    }
+}
 
