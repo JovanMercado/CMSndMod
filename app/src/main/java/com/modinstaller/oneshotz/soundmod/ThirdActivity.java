@@ -883,20 +883,28 @@ public class ThirdActivity extends Activity {
         protected void onPostExecute(String file_url) {
             mProgressDialog.dismiss();
             System.out.println("Downloaded");
-            Decompress d = new Decompress(zipFile1, unzipLocation);
+            Decompress1 d = new Decompress1(zipFile1, unzipLocation);
             d.execute();
         }
 
     }
 
-    public class Decompress extends AsyncTask<Void, Integer, Integer[]> {
+    public static void streamCopy(InputStream in, OutputStream out) throws IOException {
+        byte[] buffer = new byte[32 * 1024]; // play with sizes..
+        int readCount;
+        while ((readCount = in.read(buffer)) != -1) {
+            out.write(buffer, 0, readCount);
+        }
+    }
+
+    public class Decompress1 extends AsyncTask<Void, Integer, Integer[]> {
 
         private String _zipFile;
         private String _location;
         private int per = 0;
         private  ProgressDialog mProgressDialog;
 
-        public Decompress(String zipFile, String location) {
+        public Decompress1(String zipFile, String location) {
             _zipFile = zipFile;
             _location = location;
             _dirChecker("");
@@ -911,14 +919,630 @@ public class ThirdActivity extends Activity {
             // Set your progress dialog Title
             mProgressDialog.setTitle("Extraction in Progress");
             // Set your progress dialog Message
-            mProgressDialog.setMessage("Extracting Libraries");
+            mProgressDialog.setMessage("Extracting Libraries 1/8");
             mProgressDialog.setIndeterminate(false);
             mProgressDialog.setMax(5);
             mProgressDialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
             mProgressDialog.setCancelable(false);
             // Show progress dialog
             mProgressDialog.show();
-            System.out.println("Starting download");
+            System.out.println("Starting Decompress");
+        }
+
+        @Override
+        protected Integer[] doInBackground(Void... params) {
+            try {
+                ZipFile zip = new ZipFile(_zipFile);
+                FileInputStream fin = new FileInputStream(_zipFile);
+                ZipInputStream zin = new ZipInputStream(fin);
+                ZipEntry ze = null;
+                while ((ze = zin.getNextEntry()) != null) {
+
+                    Log.v("Decompress", "Unzipping " + ze.getName());
+                    if (ze.isDirectory()) {
+                        _dirChecker(ze.getName());
+                    } else {
+                        // Here I am doing the update of my progress bar
+                        Log.v("Decompress", "more " + ze.getName());
+
+                        per++;
+                        publishProgress(per);
+
+                        FileOutputStream fout = new FileOutputStream(_location + ze.getName());
+
+                        streamCopy(zin, fout);
+
+                        zin.closeEntry();
+                        fout.close();
+                    }
+                }
+                zin.close();
+            } catch (Exception e) {
+                Log.e("Decompress", "unzip", e);
+            }
+            return null;
+        }
+
+        @Override
+        protected void onProgressUpdate(Integer... progress) {
+            mProgressDialog.setProgress(per);
+        }
+
+        protected void onPostExecute(Integer... result) {
+            super.onPostExecute(result);
+            Log.i("UnZip", "Completed. Total size: " + result);
+            mProgressDialog.dismiss();
+            Decompress2 d = new Decompress2(zipFile2, unzipLocation);
+            d.execute();
+        }
+
+        private void _dirChecker(String dir) {
+            File f = new File(_location + dir);
+            if (!f.isDirectory()) {
+                f.mkdirs();
+            }
+        }
+
+    }
+
+    public class Decompress2 extends AsyncTask<Void, Integer, Integer[]> {
+
+        private String _zipFile;
+        private String _location;
+        private int per = 0;
+        private  ProgressDialog mProgressDialog;
+
+        public Decompress2(String zipFile, String location) {
+            _zipFile = zipFile;
+            _location = location;
+            _dirChecker("");
+        }
+
+        @Override
+        protected void onPreExecute(){
+
+            super.onPreExecute();
+            // Create progress dialog
+            mProgressDialog = new ProgressDialog(ThirdActivity.this);
+            // Set your progress dialog Title
+            mProgressDialog.setTitle("Extraction in Progress");
+            // Set your progress dialog Message
+            mProgressDialog.setMessage("Extracting Libraries 2/8");
+            mProgressDialog.setIndeterminate(false);
+            mProgressDialog.setMax(5);
+            mProgressDialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
+            mProgressDialog.setCancelable(false);
+            // Show progress dialog
+            mProgressDialog.show();
+            System.out.println("Starting Decompress");
+        }
+
+        @Override
+        protected Integer[] doInBackground(Void... params) {
+            try {
+                ZipFile zip = new ZipFile(_zipFile);
+                FileInputStream fin = new FileInputStream(_zipFile);
+                ZipInputStream zin = new ZipInputStream(fin);
+                ZipEntry ze = null;
+                while ((ze = zin.getNextEntry()) != null) {
+
+                    Log.v("Decompress", "Unzipping " + ze.getName());
+                    if (ze.isDirectory()) {
+                        _dirChecker(ze.getName());
+                    } else {
+                        // Here I am doing the update of my progress bar
+                        Log.v("Decompress", "more " + ze.getName());
+
+                        per++;
+                        publishProgress(per);
+
+                        FileOutputStream fout = new FileOutputStream(_location + ze.getName());
+
+                        streamCopy(zin, fout);
+
+                        zin.closeEntry();
+                        fout.close();
+                    }
+                }
+                zin.close();
+            } catch (Exception e) {
+                Log.e("Decompress", "unzip", e);
+            }
+            return null;
+        }
+
+        @Override
+        protected void onProgressUpdate(Integer... progress) {
+            mProgressDialog.setProgress(per);
+        }
+
+        protected void onPostExecute(Integer... result) {
+            super.onPostExecute(result);
+            Log.i("UnZip", "Completed. Total size: " + result);
+            mProgressDialog.dismiss();
+            Decompress3 d = new Decompress3(zipFile3, unzipLocation);
+            d.execute();
+        }
+
+        private void _dirChecker(String dir) {
+            File f = new File(_location + dir);
+            if (!f.isDirectory()) {
+                f.mkdirs();
+            }
+        }
+
+    }
+
+    public class Decompress3 extends AsyncTask<Void, Integer, Integer[]> {
+
+        private String _zipFile;
+        private String _location;
+        private int per = 0;
+        private  ProgressDialog mProgressDialog;
+
+        public Decompress3(String zipFile, String location) {
+            _zipFile = zipFile;
+            _location = location;
+            _dirChecker("");
+        }
+
+        @Override
+        protected void onPreExecute(){
+
+            super.onPreExecute();
+            // Create progress dialog
+            mProgressDialog = new ProgressDialog(ThirdActivity.this);
+            // Set your progress dialog Title
+            mProgressDialog.setTitle("Extraction in Progress");
+            // Set your progress dialog Message
+            mProgressDialog.setMessage("Extracting Libraries 3/8");
+            mProgressDialog.setIndeterminate(false);
+            mProgressDialog.setMax(5);
+            mProgressDialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
+            mProgressDialog.setCancelable(false);
+            // Show progress dialog
+            mProgressDialog.show();
+            System.out.println("Starting Decompress");
+        }
+
+        @Override
+        protected Integer[] doInBackground(Void... params) {
+            try {
+                ZipFile zip = new ZipFile(_zipFile);
+                FileInputStream fin = new FileInputStream(_zipFile);
+                ZipInputStream zin = new ZipInputStream(fin);
+                ZipEntry ze = null;
+                while ((ze = zin.getNextEntry()) != null) {
+
+                    Log.v("Decompress", "Unzipping " + ze.getName());
+                    if (ze.isDirectory()) {
+                        _dirChecker(ze.getName());
+                    } else {
+                        // Here I am doing the update of my progress bar
+                        Log.v("Decompress", "more " + ze.getName());
+
+                        per++;
+                        publishProgress(per);
+
+                        FileOutputStream fout = new FileOutputStream(_location + ze.getName());
+
+                        streamCopy(zin, fout);
+
+                        zin.closeEntry();
+                        fout.close();
+                    }
+                }
+                zin.close();
+            } catch (Exception e) {
+                Log.e("Decompress", "unzip", e);
+            }
+            return null;
+        }
+
+        @Override
+        protected void onProgressUpdate(Integer... progress) {
+            mProgressDialog.setProgress(per);
+        }
+
+        protected void onPostExecute(Integer... result) {
+            super.onPostExecute(result);
+            Log.i("UnZip", "Completed. Total size: " + result);
+            mProgressDialog.dismiss();
+            Decompress4 d = new Decompress4(zipFile4, unzipLocation);
+            d.execute();
+        }
+
+        private void _dirChecker(String dir) {
+            File f = new File(_location + dir);
+            if (!f.isDirectory()) {
+                f.mkdirs();
+            }
+        }
+
+    }
+
+    public class Decompress4 extends AsyncTask<Void, Integer, Integer[]> {
+
+        private String _zipFile;
+        private String _location;
+        private int per = 0;
+        private  ProgressDialog mProgressDialog;
+
+        public Decompress4(String zipFile, String location) {
+            _zipFile = zipFile;
+            _location = location;
+            _dirChecker("");
+        }
+
+        @Override
+        protected void onPreExecute(){
+
+            super.onPreExecute();
+            // Create progress dialog
+            mProgressDialog = new ProgressDialog(ThirdActivity.this);
+            // Set your progress dialog Title
+            mProgressDialog.setTitle("Extraction in Progress");
+            // Set your progress dialog Message
+            mProgressDialog.setMessage("Extracting Libraries 4/8");
+            mProgressDialog.setIndeterminate(false);
+            mProgressDialog.setMax(5);
+            mProgressDialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
+            mProgressDialog.setCancelable(false);
+            // Show progress dialog
+            mProgressDialog.show();
+            System.out.println("Starting Decompress");
+        }
+
+        @Override
+        protected Integer[] doInBackground(Void... params) {
+            try {
+                ZipFile zip = new ZipFile(_zipFile);
+                FileInputStream fin = new FileInputStream(_zipFile);
+                ZipInputStream zin = new ZipInputStream(fin);
+                ZipEntry ze = null;
+                while ((ze = zin.getNextEntry()) != null) {
+
+                    Log.v("Decompress", "Unzipping " + ze.getName());
+                    if (ze.isDirectory()) {
+                        _dirChecker(ze.getName());
+                    } else {
+                        // Here I am doing the update of my progress bar
+                        Log.v("Decompress", "more " + ze.getName());
+
+                        per++;
+                        publishProgress(per);
+
+                        FileOutputStream fout = new FileOutputStream(_location + ze.getName());
+
+                        streamCopy(zin, fout);
+
+                        zin.closeEntry();
+                        fout.close();
+                    }
+                }
+                zin.close();
+            } catch (Exception e) {
+                Log.e("Decompress", "unzip", e);
+            }
+            return null;
+        }
+
+        @Override
+        protected void onProgressUpdate(Integer... progress) {
+            mProgressDialog.setProgress(per);
+        }
+
+        protected void onPostExecute(Integer... result) {
+            super.onPostExecute(result);
+            Log.i("UnZip", "Completed. Total size: " + result);
+            mProgressDialog.dismiss();
+            Decompress5 d = new Decompress5(zipFile5, unzipLocation);
+            d.execute();
+        }
+
+        private void _dirChecker(String dir) {
+            File f = new File(_location + dir);
+            if (!f.isDirectory()) {
+                f.mkdirs();
+            }
+        }
+
+    }
+
+    public class Decompress5 extends AsyncTask<Void, Integer, Integer[]> {
+
+        private String _zipFile;
+        private String _location;
+        private int per = 0;
+        private  ProgressDialog mProgressDialog;
+
+        public Decompress5(String zipFile, String location) {
+            _zipFile = zipFile;
+            _location = location;
+            _dirChecker("");
+        }
+
+        @Override
+        protected void onPreExecute(){
+
+            super.onPreExecute();
+            // Create progress dialog
+            mProgressDialog = new ProgressDialog(ThirdActivity.this);
+            // Set your progress dialog Title
+            mProgressDialog.setTitle("Extraction in Progress");
+            // Set your progress dialog Message
+            mProgressDialog.setMessage("Extracting Libraries 5/8");
+            mProgressDialog.setIndeterminate(false);
+            mProgressDialog.setMax(5);
+            mProgressDialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
+            mProgressDialog.setCancelable(false);
+            // Show progress dialog
+            mProgressDialog.show();
+            System.out.println("Starting Decompress");
+        }
+
+        @Override
+        protected Integer[] doInBackground(Void... params) {
+            try {
+                ZipFile zip = new ZipFile(_zipFile);
+                FileInputStream fin = new FileInputStream(_zipFile);
+                ZipInputStream zin = new ZipInputStream(fin);
+                ZipEntry ze = null;
+                while ((ze = zin.getNextEntry()) != null) {
+
+                    Log.v("Decompress", "Unzipping " + ze.getName());
+                    if (ze.isDirectory()) {
+                        _dirChecker(ze.getName());
+                    } else {
+                        // Here I am doing the update of my progress bar
+                        Log.v("Decompress", "more " + ze.getName());
+
+                        per++;
+                        publishProgress(per);
+
+                        FileOutputStream fout = new FileOutputStream(_location + ze.getName());
+
+                        streamCopy(zin, fout);
+
+                        zin.closeEntry();
+                        fout.close();
+                    }
+                }
+                zin.close();
+            } catch (Exception e) {
+                Log.e("Decompress", "unzip", e);
+            }
+            return null;
+        }
+
+        @Override
+        protected void onProgressUpdate(Integer... progress) {
+            mProgressDialog.setProgress(per);
+        }
+
+        protected void onPostExecute(Integer... result) {
+            super.onPostExecute(result);
+            Log.i("UnZip", "Completed. Total size: " + result);
+            mProgressDialog.dismiss();
+            Decompress6 d = new Decompress6(zipFile6, unzipLocation);
+            d.execute();
+        }
+
+        private void _dirChecker(String dir) {
+            File f = new File(_location + dir);
+            if (!f.isDirectory()) {
+                f.mkdirs();
+            }
+        }
+
+    }
+
+    public class Decompress6 extends AsyncTask<Void, Integer, Integer[]> {
+
+        private String _zipFile;
+        private String _location;
+        private int per = 0;
+        private  ProgressDialog mProgressDialog;
+
+        public Decompress6(String zipFile, String location) {
+            _zipFile = zipFile;
+            _location = location;
+            _dirChecker("");
+        }
+
+        @Override
+        protected void onPreExecute(){
+
+            super.onPreExecute();
+            // Create progress dialog
+            mProgressDialog = new ProgressDialog(ThirdActivity.this);
+            // Set your progress dialog Title
+            mProgressDialog.setTitle("Extraction in Progress");
+            // Set your progress dialog Message
+            mProgressDialog.setMessage("Extracting Libraries 6/8");
+            mProgressDialog.setIndeterminate(false);
+            mProgressDialog.setMax(5);
+            mProgressDialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
+            mProgressDialog.setCancelable(false);
+            // Show progress dialog
+            mProgressDialog.show();
+            System.out.println("Starting Decompress");
+        }
+
+        @Override
+        protected Integer[] doInBackground(Void... params) {
+            try {
+                ZipFile zip = new ZipFile(_zipFile);
+                FileInputStream fin = new FileInputStream(_zipFile);
+                ZipInputStream zin = new ZipInputStream(fin);
+                ZipEntry ze = null;
+                while ((ze = zin.getNextEntry()) != null) {
+
+                    Log.v("Decompress", "Unzipping " + ze.getName());
+                    if (ze.isDirectory()) {
+                        _dirChecker(ze.getName());
+                    } else {
+                        // Here I am doing the update of my progress bar
+                        Log.v("Decompress", "more " + ze.getName());
+
+                        per++;
+                        publishProgress(per);
+
+                        FileOutputStream fout = new FileOutputStream(_location + ze.getName());
+
+                        streamCopy(zin, fout);
+
+                        zin.closeEntry();
+                        fout.close();
+                    }
+                }
+                zin.close();
+            } catch (Exception e) {
+                Log.e("Decompress", "unzip", e);
+            }
+            return null;
+        }
+
+        @Override
+        protected void onProgressUpdate(Integer... progress) {
+            mProgressDialog.setProgress(per);
+        }
+
+        protected void onPostExecute(Integer... result) {
+            super.onPostExecute(result);
+            Log.i("UnZip", "Completed. Total size: " + result);
+            mProgressDialog.dismiss();
+            Decompress7 d = new Decompress7(zipFile7, unzipLocation);
+            d.execute();
+        }
+
+        private void _dirChecker(String dir) {
+            File f = new File(_location + dir);
+            if (!f.isDirectory()) {
+                f.mkdirs();
+            }
+        }
+
+    }
+
+    public class Decompress7 extends AsyncTask<Void, Integer, Integer[]> {
+
+        private String _zipFile;
+        private String _location;
+        private int per = 0;
+        private  ProgressDialog mProgressDialog;
+
+        public Decompress7(String zipFile, String location) {
+            _zipFile = zipFile;
+            _location = location;
+            _dirChecker("");
+        }
+
+        @Override
+        protected void onPreExecute(){
+
+            super.onPreExecute();
+            // Create progress dialog
+            mProgressDialog = new ProgressDialog(ThirdActivity.this);
+            // Set your progress dialog Title
+            mProgressDialog.setTitle("Extraction in Progress");
+            // Set your progress dialog Message
+            mProgressDialog.setMessage("Extracting Libraries 7/8");
+            mProgressDialog.setIndeterminate(false);
+            mProgressDialog.setMax(5);
+            mProgressDialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
+            mProgressDialog.setCancelable(false);
+            // Show progress dialog
+            mProgressDialog.show();
+            System.out.println("Starting Decompress");
+        }
+
+        @Override
+        protected Integer[] doInBackground(Void... params) {
+            try {
+                ZipFile zip = new ZipFile(_zipFile);
+                FileInputStream fin = new FileInputStream(_zipFile);
+                ZipInputStream zin = new ZipInputStream(fin);
+                ZipEntry ze = null;
+                while ((ze = zin.getNextEntry()) != null) {
+
+                    Log.v("Decompress", "Unzipping " + ze.getName());
+                    if (ze.isDirectory()) {
+                        _dirChecker(ze.getName());
+                    } else {
+                        // Here I am doing the update of my progress bar
+                        Log.v("Decompress", "more " + ze.getName());
+
+                        per++;
+                        publishProgress(per);
+
+                        FileOutputStream fout = new FileOutputStream(_location + ze.getName());
+
+                        streamCopy(zin, fout);
+
+                        zin.closeEntry();
+                        fout.close();
+                    }
+                }
+                zin.close();
+            } catch (Exception e) {
+                Log.e("Decompress", "unzip", e);
+            }
+            return null;
+        }
+
+        @Override
+        protected void onProgressUpdate(Integer... progress) {
+            mProgressDialog.setProgress(per);
+        }
+
+        protected void onPostExecute(Integer... result) {
+            super.onPostExecute(result);
+            Log.i("UnZip", "Completed. Total size: " + result);
+            mProgressDialog.dismiss();
+            Decompress8 d = new Decompress8(zipFile8, unzipLocation);
+            d.execute();
+        }
+
+        private void _dirChecker(String dir) {
+            File f = new File(_location + dir);
+            if (!f.isDirectory()) {
+                f.mkdirs();
+            }
+        }
+
+    }
+
+    public class Decompress8 extends AsyncTask<Void, Integer, Integer[]> {
+
+        private String _zipFile;
+        private String _location;
+        private int per = 0;
+        private  ProgressDialog mProgressDialog;
+
+        public Decompress8(String zipFile, String location) {
+            _zipFile = zipFile;
+            _location = location;
+            _dirChecker("");
+        }
+
+        @Override
+        protected void onPreExecute(){
+
+            super.onPreExecute();
+            // Create progress dialog
+            mProgressDialog = new ProgressDialog(ThirdActivity.this);
+            // Set your progress dialog Title
+            mProgressDialog.setTitle("Extraction in Progress");
+            // Set your progress dialog Message
+            mProgressDialog.setMessage("Extracting Libraries 8/8");
+            mProgressDialog.setIndeterminate(false);
+            mProgressDialog.setMax(5);
+            mProgressDialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
+            mProgressDialog.setCancelable(false);
+            // Show progress dialog
+            mProgressDialog.show();
+            System.out.println("Starting Decompress");
         }
 
         @Override
@@ -973,14 +1597,6 @@ public class ThirdActivity extends Activity {
             }
         }
 
-    }
-
-    public static void streamCopy(InputStream in, OutputStream out) throws IOException {
-        byte[] buffer = new byte[32 * 1024]; // play with sizes..
-        int readCount;
-        while ((readCount = in.read(buffer)) != -1) {
-            out.write(buffer, 0, readCount);
-        }
     }
 
 }
