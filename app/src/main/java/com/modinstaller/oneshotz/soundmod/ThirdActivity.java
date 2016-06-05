@@ -3,7 +3,9 @@ package com.modinstaller.oneshotz.soundmod;
 import android.app.Activity;
 import android.app.Dialog;
 import android.app.ProgressDialog;
+import android.content.pm.ActivityInfo;
 import android.content.res.AssetManager;
+import android.content.res.Configuration;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Environment;
@@ -76,7 +78,6 @@ public class ThirdActivity extends Activity {
     }
 
     private class DownloadFromURL1 extends AsyncTask<String, Integer, String> {
-
         /**
          * Before starting background thread
          * */
@@ -97,6 +98,8 @@ public class ThirdActivity extends Activity {
             mProgressDialog.show();
             System.out.println("Starting download");
         }
+
+
 
         /**
          * Downloading file in background thread
@@ -164,6 +167,12 @@ public class ThirdActivity extends Activity {
             super.onProgressUpdate(progress);
             // Update the progress dialog
             mProgressDialog.setProgress(progress[0]);
+            int current_orientation = getResources().getConfiguration().orientation;
+            if (current_orientation == Configuration.ORIENTATION_LANDSCAPE) {
+                setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
+            } else {
+                setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+            }
         }
 
         @Override
@@ -870,6 +879,7 @@ public class ThirdActivity extends Activity {
         @Override
         protected void onPostExecute(String file_url) {
             mProgressDialog.dismiss();
+            setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_SENSOR);
             System.out.println("Downloaded");
         }
 
