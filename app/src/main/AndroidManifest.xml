@@ -38,6 +38,10 @@
         <activity
             android:name="com.modinstaller.oneshotz.soundmod.PermissionsActivity"
             android:label="@string/title_activity_permissions"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name="com.modinstaller.oneshotz.soundmod.UnzipProgress"
+            android:label="@string/title_activity_unzip_progress"
             android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 

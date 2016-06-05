@@ -51,7 +51,7 @@ public class PermissionsActivity extends AppCompatActivity implements View.OnCli
                 if (checkPermission()) {
 
                     Snackbar.make(view,"Permission already granted.",Snackbar.LENGTH_LONG).show();
-                    startActivity(new Intent(PermissionsActivity.this, SecondActivity.class));
+                    startActivity(new Intent(PermissionsActivity.this, ThirdActivity.class));
 
                 } else {
 
@@ -66,7 +66,7 @@ public class PermissionsActivity extends AppCompatActivity implements View.OnCli
                 } else {
 
                     Snackbar.make(view,"Permission already granted.",Snackbar.LENGTH_LONG).show();
-                    startActivity(new Intent(PermissionsActivity.this, SecondActivity.class));
+                    startActivity(new Intent(PermissionsActivity.this, ThirdActivity.class));
 
                 }
                 break;
@@ -105,7 +105,7 @@ public class PermissionsActivity extends AppCompatActivity implements View.OnCli
                 if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
 
                     Snackbar.make(view,"Permission Granted",Snackbar.LENGTH_LONG).show();
-                    startActivity(new Intent(PermissionsActivity.this, SecondActivity.class));
+                    startActivity(new Intent(PermissionsActivity.this, ThirdActivity.class));
 
                 } else {
 

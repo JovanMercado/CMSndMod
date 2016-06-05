@@ -19,6 +19,7 @@ import android.widget.Toast;
 
 import java.io.BufferedInputStream;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.FilterOutputStream;
 import java.io.IOException;
@@ -28,6 +29,9 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLConnection;
+import java.util.zip.ZipEntry;
+import java.util.zip.ZipFile;
+import java.util.zip.ZipInputStream;
 
 import eu.chainfire.libsuperuser.Shell;
 
@@ -44,7 +48,15 @@ public class ThirdActivity extends Activity {
     String URL6 = "http://cmsoundmod.weebly.com/uploads/4/4/0/8/44086793/system.zip";
     String URL7 = "http://cmsoundmod.weebly.com/uploads/4/4/0/8/44086793/v4a.zip";
     String URL8 = "http://cmsoundmod.weebly.com/uploads/4/4/0/8/44086793/volumeboost.zip";
-
+    String zipFile1 = Environment.getExternalStorageDirectory() + "/CMSoundMod/dolbyatmos.zip";
+    String zipFile2 = Environment.getExternalStorageDirectory() + "/CMSoundMod/dolbydigitalplus.zip";
+    String zipFile3 = Environment.getExternalStorageDirectory() + "/CMSoundMod/sony.zip";
+    String zipFile4 = Environment.getExternalStorageDirectory() + "/CMSoundMod/srs.zip";
+    String zipFile5 = Environment.getExternalStorageDirectory() + "/CMSoundMod/stocksound.zip";
+    String zipFile6 = Environment.getExternalStorageDirectory() + "/CMSoundMod/system.zip";
+    String zipFile7 = Environment.getExternalStorageDirectory() + "/CMSoundMod/v4a.zip";
+    String zipFile8 = Environment.getExternalStorageDirectory() + "/CMSoundMod/volumeboost.zip";
+    String unzipLocation = Environment.getExternalStorageDirectory() + "/CMSoundMod/unzipped/";
 
 
     /**
@@ -65,8 +77,8 @@ public class ThirdActivity extends Activity {
         startBtn.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
 
-                File folder = new File(Environment.getExternalStorageDirectory()+"/CMSoundMod");
-                if(!folder.exists()){
+                File folder = new File(Environment.getExternalStorageDirectory() + "/CMSoundMod");
+                if (!folder.exists()) {
                     folder.mkdirs();
 
                 }
@@ -80,7 +92,7 @@ public class ThirdActivity extends Activity {
     private class DownloadFromURL1 extends AsyncTask<String, Integer, String> {
         /**
          * Before starting background thread
-         * */
+         */
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
@@ -100,10 +112,9 @@ public class ThirdActivity extends Activity {
         }
 
 
-
         /**
          * Downloading file in background thread
-         * */
+         */
         @Override
         protected String doInBackground(String... f_url) {
             int count;
@@ -127,7 +138,7 @@ public class ThirdActivity extends Activity {
 
                 // Output stream to write file
 
-                OutputStream output = new         FileOutputStream(root + "/CMSoundMod/" + name);
+                OutputStream output = new FileOutputStream(root + "/CMSoundMod/" + name);
                 byte data[] = new byte[1024];
 
                 long total = 0;
@@ -157,10 +168,9 @@ public class ThirdActivity extends Activity {
         }
 
 
-
         /**
          * After completing background task
-         * **/
+         **/
 
         @Override
         protected void onProgressUpdate(Integer... progress) {
@@ -188,7 +198,7 @@ public class ThirdActivity extends Activity {
 
         /**
          * Before starting background thread
-         * */
+         */
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
@@ -209,7 +219,7 @@ public class ThirdActivity extends Activity {
 
         /**
          * Downloading file in background thread
-         * */
+         */
         @Override
         protected String doInBackground(String... f_url) {
             int count;
@@ -233,7 +243,7 @@ public class ThirdActivity extends Activity {
 
                 // Output stream to write file
 
-                OutputStream output = new         FileOutputStream(root + "/CMSoundMod/" + name);
+                OutputStream output = new FileOutputStream(root + "/CMSoundMod/" + name);
                 byte data[] = new byte[1024];
 
                 long total = 0;
@@ -263,10 +273,9 @@ public class ThirdActivity extends Activity {
         }
 
 
-
         /**
          * After completing background task
-         * **/
+         **/
 
         @Override
         protected void onProgressUpdate(Integer... progress) {
@@ -288,7 +297,7 @@ public class ThirdActivity extends Activity {
 
         /**
          * Before starting background thread
-         * */
+         */
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
@@ -309,7 +318,7 @@ public class ThirdActivity extends Activity {
 
         /**
          * Downloading file in background thread
-         * */
+         */
         @Override
         protected String doInBackground(String... f_url) {
             int count;
@@ -333,7 +342,7 @@ public class ThirdActivity extends Activity {
 
                 // Output stream to write file
 
-                OutputStream output = new         FileOutputStream(root + "/CMSoundMod/" + name);
+                OutputStream output = new FileOutputStream(root + "/CMSoundMod/" + name);
                 byte data[] = new byte[1024];
 
                 long total = 0;
@@ -363,10 +372,9 @@ public class ThirdActivity extends Activity {
         }
 
 
-
         /**
          * After completing background task
-         * **/
+         **/
 
         @Override
         protected void onProgressUpdate(Integer... progress) {
@@ -388,7 +396,7 @@ public class ThirdActivity extends Activity {
 
         /**
          * Before starting background thread
-         * */
+         */
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
@@ -409,7 +417,7 @@ public class ThirdActivity extends Activity {
 
         /**
          * Downloading file in background thread
-         * */
+         */
         @Override
         protected String doInBackground(String... f_url) {
             int count;
@@ -433,7 +441,7 @@ public class ThirdActivity extends Activity {
 
                 // Output stream to write file
 
-                OutputStream output = new         FileOutputStream(root + "/CMSoundMod/" + name);
+                OutputStream output = new FileOutputStream(root + "/CMSoundMod/" + name);
                 byte data[] = new byte[1024];
 
                 long total = 0;
@@ -463,10 +471,9 @@ public class ThirdActivity extends Activity {
         }
 
 
-
         /**
          * After completing background task
-         * **/
+         **/
 
         @Override
         protected void onProgressUpdate(Integer... progress) {
@@ -488,7 +495,7 @@ public class ThirdActivity extends Activity {
 
         /**
          * Before starting background thread
-         * */
+         */
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
@@ -509,7 +516,7 @@ public class ThirdActivity extends Activity {
 
         /**
          * Downloading file in background thread
-         * */
+         */
         @Override
         protected String doInBackground(String... f_url) {
             int count;
@@ -533,7 +540,7 @@ public class ThirdActivity extends Activity {
 
                 // Output stream to write file
 
-                OutputStream output = new         FileOutputStream(root + "/CMSoundMod/" + name);
+                OutputStream output = new FileOutputStream(root + "/CMSoundMod/" + name);
                 byte data[] = new byte[1024];
 
                 long total = 0;
@@ -563,10 +570,9 @@ public class ThirdActivity extends Activity {
         }
 
 
-
         /**
          * After completing background task
-         * **/
+         **/
 
         @Override
         protected void onProgressUpdate(Integer... progress) {
@@ -589,7 +595,7 @@ public class ThirdActivity extends Activity {
 
         /**
          * Before starting background thread
-         * */
+         */
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
@@ -610,7 +616,7 @@ public class ThirdActivity extends Activity {
 
         /**
          * Downloading file in background thread
-         * */
+         */
         @Override
         protected String doInBackground(String... f_url) {
             int count;
@@ -634,7 +640,7 @@ public class ThirdActivity extends Activity {
 
                 // Output stream to write file
 
-                OutputStream output = new         FileOutputStream(root + "/CMSoundMod/" + name);
+                OutputStream output = new FileOutputStream(root + "/CMSoundMod/" + name);
                 byte data[] = new byte[1024];
 
                 long total = 0;
@@ -664,10 +670,9 @@ public class ThirdActivity extends Activity {
         }
 
 
-
         /**
          * After completing background task
-         * **/
+         **/
 
         @Override
         protected void onProgressUpdate(Integer... progress) {
@@ -689,7 +694,7 @@ public class ThirdActivity extends Activity {
 
         /**
          * Before starting background thread
-         * */
+         */
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
@@ -710,7 +715,7 @@ public class ThirdActivity extends Activity {
 
         /**
          * Downloading file in background thread
-         * */
+         */
         @Override
         protected String doInBackground(String... f_url) {
             int count;
@@ -734,7 +739,7 @@ public class ThirdActivity extends Activity {
 
                 // Output stream to write file
 
-                OutputStream output = new         FileOutputStream(root + "/CMSoundMod/" + name);
+                OutputStream output = new FileOutputStream(root + "/CMSoundMod/" + name);
                 byte data[] = new byte[1024];
 
                 long total = 0;
@@ -764,10 +769,9 @@ public class ThirdActivity extends Activity {
         }
 
 
-
         /**
          * After completing background task
-         * **/
+         **/
 
         @Override
         protected void onProgressUpdate(Integer... progress) {
@@ -789,7 +793,7 @@ public class ThirdActivity extends Activity {
 
         /**
          * Before starting background thread
-         * */
+         */
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
@@ -810,7 +814,7 @@ public class ThirdActivity extends Activity {
 
         /**
          * Downloading file in background thread
-         * */
+         */
         @Override
         protected String doInBackground(String... f_url) {
             int count;
@@ -834,7 +838,7 @@ public class ThirdActivity extends Activity {
 
                 // Output stream to write file
 
-                OutputStream output = new         FileOutputStream(root + "/CMSoundMod/" + name);
+                OutputStream output = new FileOutputStream(root + "/CMSoundMod/" + name);
                 byte data[] = new byte[1024];
 
                 long total = 0;
@@ -864,10 +868,9 @@ public class ThirdActivity extends Activity {
         }
 
 
-
         /**
          * After completing background task
-         * **/
+         **/
 
         @Override
         protected void onProgressUpdate(Integer... progress) {
@@ -879,14 +882,106 @@ public class ThirdActivity extends Activity {
         @Override
         protected void onPostExecute(String file_url) {
             mProgressDialog.dismiss();
-            setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_SENSOR);
             System.out.println("Downloaded");
+            Decompress d = new Decompress(zipFile1, unzipLocation);
+            d.execute();
         }
 
     }
 
+    public class Decompress extends AsyncTask<Void, Integer, Integer[]> {
+
+        private String _zipFile;
+        private String _location;
+        private int per = 0;
+        private  ProgressDialog mProgressDialog;
+
+        public Decompress(String zipFile, String location) {
+            _zipFile = zipFile;
+            _location = location;
+            _dirChecker("");
+        }
+
+        @Override
+        protected void onPreExecute(){
+
+            super.onPreExecute();
+            // Create progress dialog
+            mProgressDialog = new ProgressDialog(ThirdActivity.this);
+            // Set your progress dialog Title
+            mProgressDialog.setTitle("Extraction in Progress");
+            // Set your progress dialog Message
+            mProgressDialog.setMessage("Extracting Libraries");
+            mProgressDialog.setIndeterminate(false);
+            mProgressDialog.setMax(5);
+            mProgressDialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
+            mProgressDialog.setCancelable(false);
+            // Show progress dialog
+            mProgressDialog.show();
+            System.out.println("Starting download");
+        }
+
+        @Override
+        protected Integer[] doInBackground(Void... params) {
+            try {
+                ZipFile zip = new ZipFile(_zipFile);
+                FileInputStream fin = new FileInputStream(_zipFile);
+                ZipInputStream zin = new ZipInputStream(fin);
+                ZipEntry ze = null;
+                while ((ze = zin.getNextEntry()) != null) {
+
+                    Log.v("Decompress", "Unzipping " + ze.getName());
+                    if (ze.isDirectory()) {
+                        _dirChecker(ze.getName());
+                    } else {
+                        // Here I am doing the update of my progress bar
+                        Log.v("Decompress", "more " + ze.getName());
+
+                        per++;
+                        publishProgress(per);
+
+                        FileOutputStream fout = new FileOutputStream(_location + ze.getName());
+
+                        streamCopy(zin, fout);
+
+                        zin.closeEntry();
+                        fout.close();
+                    }
+                }
+                zin.close();
+            } catch (Exception e) {
+                Log.e("Decompress", "unzip", e);
+            }
+            return null;
+        }
+
+        @Override
+        protected void onProgressUpdate(Integer... progress) {
+            mProgressDialog.setProgress(per);
+        }
+
+        protected void onPostExecute(Integer... result) {
+            super.onPostExecute(result);
+            Log.i("UnZip", "Completed. Total size: " + result);
+            mProgressDialog.dismiss();
+        }
+
+        private void _dirChecker(String dir) {
+            File f = new File(_location + dir);
+            if (!f.isDirectory()) {
+                f.mkdirs();
+            }
+        }
+
+    }
+
+    public static void streamCopy(InputStream in, OutputStream out) throws IOException {
+        byte[] buffer = new byte[32 * 1024]; // play with sizes..
+        int readCount;
+        while ((readCount = in.read(buffer)) != -1) {
+            out.write(buffer, 0, readCount);
+        }
+    }
+
 }
-
-
-
 

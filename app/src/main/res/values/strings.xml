@@ -64,4 +64,5 @@
 
     <string name="pref_title_vibrate">Vibrate</string>
     <string name="title_activity_permissions">PermissionsActivity</string>
+    <string name="title_activity_unzip_progress">UnzipProgress</string>
 </resources>
