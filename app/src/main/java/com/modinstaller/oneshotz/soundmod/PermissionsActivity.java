@@ -55,7 +55,7 @@ public class PermissionsActivity extends AppCompatActivity implements View.OnCli
 
                 } else {
 
-                    Snackbar.make(view,"Please request permission.",Snackbar.LENGTH_LONG).show();
+                    Snackbar.make(view,"Please grant permission.",Snackbar.LENGTH_LONG).show();
                 }
                 break;
             case R.id.request_permission:
@@ -90,7 +90,7 @@ public class PermissionsActivity extends AppCompatActivity implements View.OnCli
 
         if (ActivityCompat.shouldShowRequestPermissionRationale(activity,Manifest.permission.WRITE_EXTERNAL_STORAGE)){
 
-            Toast.makeText(context,"GPS permission allows us to access location data. Please allow in App Settings for additional functionality.",Toast.LENGTH_LONG).show();
+            Toast.makeText(context,"This Permission allows writing to the SD Card",Toast.LENGTH_LONG).show();
 
         } else {
 
@@ -104,12 +104,12 @@ public class PermissionsActivity extends AppCompatActivity implements View.OnCli
             case PERMISSION_REQUEST_CODE:
                 if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
 
-                    Snackbar.make(view,"Permission Granted, Now you can access location data.",Snackbar.LENGTH_LONG).show();
+                    Snackbar.make(view,"Permission Granted",Snackbar.LENGTH_LONG).show();
                     startActivity(new Intent(PermissionsActivity.this, SecondActivity.class));
 
                 } else {
 
-                    Snackbar.make(view,"Permission Denied, You cannot access location data.",Snackbar.LENGTH_LONG).show();
+                    Snackbar.make(view,"Permission Denied",Snackbar.LENGTH_LONG).show();
 
                 }
                 break;

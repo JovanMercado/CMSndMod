@@ -32,9 +32,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="     This App Requires Permissions to Write to the SD Card and Use Internet Service. Please Check and Grant those Permissions."
+        android:text="This App Requires Permissions to Write to the SD Card and Use Internet Service. Please Check and Grant those Permissions."
         android:id="@+id/textView13"
         android:layout_above="@+id/check_permission"
         android:layout_alignParentStart="true"
-        android:layout_marginBottom="122dp" />
+        android:layout_marginBottom="122dp"
+        android:textAlignment="center" />
 </RelativeLayout>
